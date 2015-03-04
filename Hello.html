@@ -23,7 +23,7 @@ Elm.Basics.make = function (_elm) {
               _v0._0,
               _v0._1);}
          _U.badCase($moduleName,
-         "on line 460, column 19 to 24");
+         "on line 472, column 19 to 24");
       }();
    });
    var curry = F3(function (f,
@@ -41,7 +41,7 @@ Elm.Basics.make = function (_elm) {
          switch (_v4.ctor)
          {case "_Tuple2": return _v4._1;}
          _U.badCase($moduleName,
-         "on line 444, column 13 to 14");
+         "on line 456, column 13 to 14");
       }();
    };
    var fst = function (_v8) {
@@ -49,7 +49,7 @@ Elm.Basics.make = function (_elm) {
          switch (_v8.ctor)
          {case "_Tuple2": return _v8._0;}
          _U.badCase($moduleName,
-         "on line 440, column 13 to 14");
+         "on line 452, column 13 to 14");
       }();
    };
    var always = F2(function (a,
@@ -133,12 +133,20 @@ Elm.Basics.make = function (_elm) {
       return t;
    };
    _elm.Basics.values = {_op: _op
-                        ,radians: radians
-                        ,degrees: degrees
-                        ,turns: turns
-                        ,fromPolar: fromPolar
-                        ,toPolar: toPolar
+                        ,max: max
+                        ,min: min
+                        ,compare: compare
+                        ,not: not
+                        ,xor: xor
+                        ,otherwise: otherwise
                         ,rem: rem
+                        ,negate: negate
+                        ,abs: abs
+                        ,sqrt: sqrt
+                        ,clamp: clamp
+                        ,logBase: logBase
+                        ,e: e
+                        ,pi: pi
                         ,cos: cos
                         ,sin: sin
                         ,tan: tan
@@ -146,37 +154,29 @@ Elm.Basics.make = function (_elm) {
                         ,asin: asin
                         ,atan: atan
                         ,atan2: atan2
-                        ,sqrt: sqrt
-                        ,negate: negate
-                        ,abs: abs
-                        ,logBase: logBase
-                        ,clamp: clamp
-                        ,pi: pi
-                        ,e: e
-                        ,compare: compare
-                        ,LT: LT
-                        ,EQ: EQ
-                        ,GT: GT
-                        ,min: min
-                        ,max: max
-                        ,xor: xor
-                        ,not: not
-                        ,otherwise: otherwise
                         ,round: round
-                        ,truncate: truncate
                         ,floor: floor
                         ,ceiling: ceiling
+                        ,truncate: truncate
                         ,toFloat: toFloat
+                        ,degrees: degrees
+                        ,radians: radians
+                        ,turns: turns
+                        ,toPolar: toPolar
+                        ,fromPolar: fromPolar
                         ,isNaN: isNaN
                         ,isInfinite: isInfinite
                         ,toString: toString
-                        ,identity: identity
-                        ,always: always
                         ,fst: fst
                         ,snd: snd
+                        ,identity: identity
+                        ,always: always
                         ,flip: flip
                         ,curry: curry
-                        ,uncurry: uncurry};
+                        ,uncurry: uncurry
+                        ,LT: LT
+                        ,EQ: EQ
+                        ,GT: GT};
    return _elm.Basics.values;
 };Elm.Color = Elm.Color || {};
 Elm.Color.make = function (_elm) {
@@ -1827,9 +1827,32 @@ Elm.Main.make = function (_elm) {
    $Color = Elm.Color.make(_elm),
    $Graphics$Collage = Elm.Graphics.Collage.make(_elm),
    $Graphics$Element = Elm.Graphics.Element.make(_elm),
-   $Keyboard = Elm.Keyboard.make(_elm),
    $List = Elm.List.make(_elm),
-   $Signal = Elm.Signal.make(_elm);
+   $Mouse = Elm.Mouse.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $Text = Elm.Text.make(_elm);
+   var sombra = function (_v0) {
+      return function () {
+         switch (_v0.ctor)
+         {case "_Tuple2":
+            return function () {
+                 var $ = {ctor: "_Tuple2"
+                         ,_0: $Basics.toFloat(_v0._0)
+                         ,_1: $Basics.toFloat(_v0._1)},
+                 x$ = $._0,
+                 y$ = $._1;
+                 return A2($Graphics$Collage.move,
+                 {ctor: "_Tuple2"
+                 ,_0: 50 * x$ - 280
+                 ,_1: 50 * y$ - 240},
+                 A2($Graphics$Collage.filled,
+                 $Color.lightGrey,
+                 $Graphics$Collage.circle(10)));
+              }();}
+         _U.badCase($moduleName,
+         "between lines 35 and 36");
+      }();
+   };
    var altablero = function (f) {
       return A2($Graphics$Collage.move,
       {ctor: "_Tuple2"
@@ -1839,7 +1862,8 @@ Elm.Main.make = function (_elm) {
       $Color.red,
       $Graphics$Collage.circle(10)));
    };
-   var render = function (ficha) {
+   var render = F2(function (ficha,
+   raton) {
       return function () {
          var fila = $Graphics$Collage.group(A2($List.map,
          function (n) {
@@ -1852,54 +1876,122 @@ Elm.Main.make = function (_elm) {
             $Graphics$Collage.square(40)));
          },
          _L.range(1,9)));
-         return A3($Graphics$Collage.collage,
-         600,
-         600,
-         A2($Basics._op["++"],
-         A2($List.map,
-         function (n) {
-            return A2($Graphics$Collage.move,
-            {ctor: "_Tuple2"
-            ,_0: 0
-            ,_1: 50 * n - 240},
-            fila);
-         },
-         _L.range(1,9)),
-         _L.fromArray([altablero(ficha)])));
-      }();
-   };
-   var $goto = F2(function (_v0,
-   f) {
-      return function () {
-         return function () {
-            var $ = {ctor: "_Tuple2"
-                    ,_0: $Basics.toFloat(_v0.x)
-                    ,_1: $Basics.toFloat(_v0.y)},
-            x$ = $._0,
-            y$ = $._1;
-            return _U.replace([["x"
-                               ,A2($Basics.min,
-                               9,
-                               A2($Basics.max,1,f.x + x$))]
-                              ,["y"
-                               ,A2($Basics.min,
-                               9,
-                               A2($Basics.max,1,f.y + y$))]],
-            f);
-         }();
+         return A2($Graphics$Element.flow,
+         $Graphics$Element.right,
+         _L.fromArray([A3($Graphics$Collage.collage,
+                      600,
+                      600,
+                      A2($Basics._op["++"],
+                      A2($List.map,
+                      function (n) {
+                         return A2($Graphics$Collage.move,
+                         {ctor: "_Tuple2"
+                         ,_0: 0
+                         ,_1: 50 * n - 240},
+                         fila);
+                      },
+                      _L.range(1,9)),
+                      A2($Basics._op["++"],
+                      _L.fromArray([sombra(raton)]),
+                      _L.fromArray([altablero(ficha)]))))
+                      ,$Text.asText(raton)]));
       }();
    });
-   var ficha = {_: {},x: 5,y: 2};
-   var main = A2($Signal.map,
+   var direccion = F2(function (_v4,
+   f) {
+      return function () {
+         switch (_v4.ctor)
+         {case "_Tuple2":
+            return function () {
+                 var $ = {ctor: "_Tuple2"
+                         ,_0: $Basics.toFloat(_v4._0)
+                         ,_1: $Basics.toFloat(_v4._1)},
+                 x$ = $._0,
+                 y$ = $._1;
+                 var dist = $Basics.abs(x$ - f.x) + $Basics.abs(y$ - f.y);
+                 return _U.eq(dist,
+                 1) ? {ctor: "_Tuple2"
+                      ,_0: x$ - f.x
+                      ,_1: y$ - f.y} : {ctor: "_Tuple2"
+                                       ,_0: 0
+                                       ,_1: 0};
+              }();}
+         _U.badCase($moduleName,
+         "between lines 26 and 29");
+      }();
+   });
+   var dondeEsta = function (_v8) {
+      return function () {
+         switch (_v8.ctor)
+         {case "_Tuple2":
+            return function () {
+                 var $ = {ctor: "_Tuple2"
+                         ,_0: $Basics.toFloat(_v8._0)
+                         ,_1: $Basics.toFloat(_v8._1)},
+                 x$ = $._0,
+                 y$ = $._1;
+                 return {ctor: "_Tuple2"
+                        ,_0: A2($Basics.min,
+                        9,
+                        A2($Basics.max,
+                        1,
+                        1 + $Basics.floor((x$ - 45) / 50)))
+                        ,_1: A2($Basics.min,
+                        9,
+                        A2($Basics.max,
+                        1,
+                        9 - $Basics.floor((y$ - 65) / 50)))};
+              }();}
+         _U.badCase($moduleName,
+         "between lines 21 and 23");
+      }();
+   };
+   var $goto = F2(function (_v12,
+   f) {
+      return function () {
+         switch (_v12.ctor)
+         {case "_Tuple2":
+            return function () {
+                 var $ = A2(direccion,
+                 dondeEsta({ctor: "_Tuple2"
+                           ,_0: _v12._0
+                           ,_1: _v12._1}),
+                 f),
+                 x$ = $._0,
+                 y$ = $._1;
+                 return _U.replace([["x"
+                                    ,A2($Basics.min,
+                                    9,
+                                    A2($Basics.max,1,f.x + x$))]
+                                   ,["y"
+                                    ,A2($Basics.min,
+                                    9,
+                                    A2($Basics.max,1,f.y + y$))]],
+                 f);
+              }();}
+         _U.badCase($moduleName,
+         "between lines 16 and 18");
+      }();
+   });
+   var ficha = {_: {},x: 4,y: 2};
+   var main = A3($Signal.map2,
    render,
    A3($Signal.foldp,
    $goto,
    ficha,
-   $Keyboard.arrows));
+   A2($Signal.sampleOn,
+   $Mouse.clicks,
+   $Mouse.position)),
+   A2($Signal.map,
+   dondeEsta,
+   $Mouse.position));
    _elm.Main.values = {_op: _op
                       ,ficha: ficha
                       ,$goto: $goto
+                      ,dondeEsta: dondeEsta
+                      ,direccion: direccion
                       ,altablero: altablero
+                      ,sombra: sombra
                       ,render: render
                       ,main: main};
    return _elm.Main.values;
